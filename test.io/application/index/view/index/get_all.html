@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>getAll content</title>
+  <link rel="stylesheet" href="/static/bootstrap.min.css">
+  <style>
+    .wrap{
+      margin:40px auto;
+    }
+    .wrap>h2{
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+     <div class="container">
+       {include file="public/nav" /}
+       <div class="wrap">
+         <h2>content list</h2>
+        <table class="table">
+          <tr>
+            <th>id</th>
+            <th>title</th>
+            <th>create_time</th>
+            <th>operate</th>
+          </tr>
+          {foreach $data as $v}
+           <tr>
+             <td>{$v.id}</td>
+             <td style="width: 300px;">{$v.title}</td>
+             <td style="width: 300px;">{$v.create_time}</td>
+             <td>
+               <a class="btn btn-primary" href="{:url('index/index/getOne',['id'=>$v.id])}">查看</a>
+               <a class="btn btn-warning" href="">修改</a>
+               <a class="btn btn-danger" href="{:url('index/index/delete',['id'=>$v.id])}">删除</a>
+             </td>
+           </tr>
+          {/foreach}
+        </table>
+       </div>
+     </div>
+     <img src="http://test.io/uploads/20210309/0c4a2592aa04e720a41c95aead2f12d2.jpg" alt="">
+</body>
+</html>

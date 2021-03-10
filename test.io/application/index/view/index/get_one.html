@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>getone content</title>
+  <link rel="stylesheet" href="/static/ckeditor-content-styles.css">
+</head>
+<style>
+  .main{
+    width: 600px;
+    margin: 30px auto;
+  }
+  .main>div:first-child{
+   float: right;
+  }
+  .main>div:nth-child(2){
+    display: table;
+    clear: right;
+    content: '';
+    height: 30px;
+  }
+  .content{
+    border: lightblue solid 1px;
+  }
+
+</style>
+
+<body>
+
+  <input type="hidden" value="{$req}" id="id">
+
+<div class="container">
+  <div style="margin-left: 200px;margin-bottom: 40px;">{include file="public/nav" /}</div>
+  <h2 style="text-align: center;" id="title"></h2>
+  <div class="main ck-content">
+    <div><div>CreateTime: &nbsp; &nbsp;<span id="time"></span></div></div>
+    <div></div>
+    <div id="content" class="content"></div>
+  </div>
+</div>
+</body>
+<script src="/static/jquery-3.4.1.min.js"></script>
+<script>
+  $(function(){
+     let id=$('#id').val();
+     console.log(id)
+     $.ajax({
+       url:'/index/index/getone',
+       data:{id},
+       type:'post',
+       dataType:'json',
+       success:(res)=>{
+         console.log(res);
+         $('#title').text(res.title)
+         $('.main  #time').text(res.create_time);
+         $('.main  #content').html(res.content);
+       }
+     })
+  })
+</script>
+
+</html>
